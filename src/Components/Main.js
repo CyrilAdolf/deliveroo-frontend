@@ -4,23 +4,24 @@ const Main = ({ categories, isLoading, orders, setOrders }) => {
   //
   // UPDATE ORDERS WITH NEW MEAL
   const updateUnique = (meal) => {
-    let newOrders = [...orders];
-    const obj = {
-      key: meal.id,
-      name: meal.title,
-      price: meal.price,
-      quantity: 1,
-    };
-    newOrders.push(obj);
-    setOrders(newOrders);
-    console.log(orders);
-  };
-
-  // IMPLEMENT QUANTITY ONLY
-  const updateDuplicate = (meal) => {
-    let newOrders = [...orders];
-    meal.quantity++;
-    setOrders(newOrders);
+    const newOrders = [...orders];
+    let isPresent = false;
+    for (let i = 0; i < newOrders.length; i++) {
+      if (newOrders[i].key === meal.id) {
+        newOrders[i].quantity++;
+        isPresent = true;
+        return setOrders(newOrders);
+      }
+    }
+    if (!isPresent) {
+      newOrders.push({
+        key: meal.id,
+        name: meal.title,
+        price: meal.price,
+        quantity: 1,
+      });
+      setOrders(newOrders);
+    }
   };
 
   return isLoading ? (
@@ -40,16 +41,7 @@ const Main = ({ categories, isLoading, orders, setOrders }) => {
                   // SET ORDERS STATE HERE
                   // SET ORDERS STATE HERE
                   onClick={() => {
-                    // orders.length === 0
-                    //   ? updateUnique(meal)
-                    //   : orders.map((order, i) => {
-                    //       let isPresent = false;
-                    //       return (
-                    //         order.key === meal.id && updateDuplicate(order)
-                    //       );
-                    //       // : updateUnique(meal);
-                    //     });
-                    // return updateUnique(meal);
+                    updateUnique(meal);
                   }}
                 >
                   <div>

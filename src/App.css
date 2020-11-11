@@ -122,10 +122,26 @@ p {
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
   font-size: 1.2rem;
   color: #808080;
-  padding: 10px;
+  padding: 15px;
   box-sizing: border-box;
+  display: flex;
+  justify-content: center;
 }
-
+.empty {
+  background-color: silver;
+  height: 40px;
+  width: 170px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 .confirm {
   display: flex;
   justify-content: center;
@@ -133,9 +149,16 @@ p {
   background-color: lightgreen;
   color: white;
   height: 40px;
-  width: 150px;
+  width: 170px;
   text-align: center;
+  cursor: pointer;
+  border: lightgreen 2px solid;
 }
+.confirm:hover {
+  background-color: white;
+  color: lightgreen;
+}
+
 .aside button {
   height: 20px;
   width: 20px;
@@ -157,8 +180,23 @@ p {
 }
 .orderLine {
   justify-content: space-between;
+  width: 330px;
 }
 
+.name {
+  width: 200px;
+}
+.total-1,
+.total-2 {
+  border-top: silver 1px solid;
+  width: 330px;
+}
+.total-1 > div,
+.total-2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 /* FOOTER */
 .footer {
   display: flex;
