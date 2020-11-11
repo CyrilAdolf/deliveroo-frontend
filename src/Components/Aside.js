@@ -2,12 +2,12 @@ import React from "react";
 
 const Aside = ({ orders, setOrders }) => {
   const deliveryPrice = 2.5;
-  const CalculTotal = () => {
-    let result = 0;
+  const CalculTotal = (x) => {
+    let result = x || 0;
     orders.forEach((order) => {
       result += Number(order.quantity) * Number(order.price);
     });
-    return result;
+    return result.toFixed(2);
   };
   return (
     <div className="aside">
@@ -16,7 +16,6 @@ const Aside = ({ orders, setOrders }) => {
       ) : (
         <div className="center">
           <div className="confirm">Valider mon panier</div>
-
           {orders.map((order, i) => {
             return (
               <div key={i} className="orderLine">
@@ -25,11 +24,11 @@ const Aside = ({ orders, setOrders }) => {
                     onClick={() => {
                       let newOrders = [...orders];
                       order.quantity--;
-                      // NEED TO BE FIXED
-                      // NEED TO BE FIXED
+                      // NEED TO BE FIXED , USE FILTER?
                       if (order.quantity === 0) {
                         newOrders.splice(order.key, 1);
                       }
+                      // NEED TO BE FIXED
                       setOrders(newOrders);
                     }}
                   >
@@ -48,7 +47,7 @@ const Aside = ({ orders, setOrders }) => {
                 </div>
                 <p className="name">{order.name}</p>
                 <div className="priceUnit">
-                  <p>{order.price * order.quantity} €</p>
+                  <p>{(order.price * order.quantity).toFixed(2)} €</p>
                 </div>
               </div>
             );
@@ -65,7 +64,7 @@ const Aside = ({ orders, setOrders }) => {
           </div>
           <div className="total-2">
             <p>Total</p>
-            <p>{deliveryPrice + CalculTotal()} €</p>
+            <p>{CalculTotal(deliveryPrice)} €</p>
           </div>
         </div>
       )}

@@ -1,9 +1,9 @@
 import React from "react";
-import logo from "/Users/cyriladolf/LeReacteur/React/06/exercise-deliveroo-front/src/assets/deli.jpg";
+import logo from "../assets/deli.jpg";
 
 const Header = ({ restaurant, isLoading }) => {
   return isLoading ? (
-    <span>En cours de chargement... </span>
+    <span>En cours de chargement...</span>
   ) : (
     <div className="header">
       <div className="container">

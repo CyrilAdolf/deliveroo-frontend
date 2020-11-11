@@ -3,17 +3,18 @@ import React from "react";
 const Main = ({ categories, isLoading, orders, setOrders }) => {
   //
   // UPDATE ORDERS WITH NEW MEAL
-  const updateUnique = (meal) => {
+  const updateOrder = (meal) => {
     const newOrders = [...orders];
-    let isPresent = false;
+    let checkId = false;
     for (let i = 0; i < newOrders.length; i++) {
       if (newOrders[i].key === meal.id) {
         newOrders[i].quantity++;
-        isPresent = true;
+        checkId = true;
         return setOrders(newOrders);
       }
     }
-    if (!isPresent) {
+    // ONLY IF NEW ID
+    if (!checkId) {
       newOrders.push({
         key: meal.id,
         name: meal.title,
@@ -25,23 +26,21 @@ const Main = ({ categories, isLoading, orders, setOrders }) => {
   };
 
   return isLoading ? (
-    <span>Chargement...</span>
+    <span>En cours de chargement...</span>
   ) : (
     <div className="main">
       {categories.map((category, i) => {
         return (
           <div className="category" key={i}>
             <h2>{category.name}</h2>
-            <br />
             {category.meals.map((meal) => {
               return (
                 <div
                   className="card"
                   key={meal.id}
-                  // SET ORDERS STATE HERE
-                  // SET ORDERS STATE HERE
+                  // SET STATE HERE
                   onClick={() => {
-                    updateUnique(meal);
+                    updateOrder(meal);
                   }}
                 >
                   <div>
